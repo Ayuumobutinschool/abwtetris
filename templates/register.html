@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Registrieren · TETRIS{% endblock %}
+{% block content %}
+<section class="card auth">
+  <h1 class="logo">TETRIS</h1>
+  <p class="tagline">Account erstellen</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flashes">
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" class="form" autocomplete="on">
+    <label>Username
+      <input name="username" autocomplete="username" minlength="3" maxlength="20" required autofocus>
+    </label>
+    <label>Passwort
+      <input name="password" type="password" autocomplete="new-password" minlength="6" required>
+    </label>
+    <label>Passwort wiederholen
+      <input name="password2" type="password" autocomplete="new-password" minlength="6" required>
+    </label>
+    <button type="submit" class="btn">Registrieren</button>
+  </form>
+
+  <p class="alt">Schon einen Account? <a href="{{ url_for('login') }}">Einloggen</a></p>
+</section>
+{% endblock %}

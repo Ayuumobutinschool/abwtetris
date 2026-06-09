@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Spielen · TETRIS{% endblock %}
+{% block content %}
+<div class="game-shell">
+  <header class="topbar">
+    <span class="logo logo-sm">TETRIS</span>
+    <div class="topbar-right">
+      <span class="who">Hi, {{ username }}</span>
+      <form method="post" action="{{ url_for('logout') }}" class="inline">
+        <button class="btn btn-ghost btn-sm">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="play-area">
+    <section class="board-wrap">
+      <canvas id="board" width="300" height="600"></canvas>
+      <div id="overlay" class="overlay">
+        <div class="overlay-inner">
+          <h2 id="overlay-title">BEREIT?</h2>
+          <p id="overlay-text">Drücke <kbd>Enter</kbd> zum Start</p>
+          <button id="startBtn" class="btn">Spiel starten</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="panel stats">
+        <div class="stat"><span class="stat-label">Score</span><span id="score" class="stat-val">0</span></div>
+        <div class="stat"><span class="stat-label">Lines</span><span id="lines" class="stat-val">0</span></div>
+        <div class="stat"><span class="stat-label">Level</span><span id="level" class="stat-val">1</span></div>
+      </div>
+      <div class="panel next">
+        <span class="panel-title">Next</span>
+        <canvas id="next" width="120" height="120"></canvas>
+      </div>
+      <div class="panel controls">
+        <span class="panel-title">Steuerung</span>
+        <ul>
+          <li><kbd>&larr;</kbd><kbd>&rarr;</kbd> bewegen</li>
+          <li><kbd>&darr;</kbd> soft drop</li>
+          <li><kbd>&uarr;</kbd> drehen</li>
+          <li><kbd>Space</kbd> hard drop</li>
+          <li><kbd>P</kbd> Pause</li>
+        </ul>
+      </div>
+    </aside>
+
+    <aside class="panel leaderboard">
+      <span class="panel-title">High Scores</span>
+      <ol id="leaderboard" class="lb-list"><li class="lb-empty">lädt …</li></ol>
+      <div id="personal" class="personal"></div>
+    </aside>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='tetris.js') }}"></script>
+{% endblock %}
